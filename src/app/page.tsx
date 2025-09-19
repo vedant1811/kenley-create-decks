@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { generatePresentationContent } from '@/lib/openai'
 
 async function handleSubmit(formData: FormData) {
   'use server'
@@ -6,11 +7,12 @@ async function handleSubmit(formData: FormData) {
   const input = formData.get('input') as string
 
   if (input && input.trim()) {
-    // Process the input here
-    console.log('Received input:', input)
+    // Generate presentation content using OpenAI
+    const content = await generatePresentationContent(input)
+    console.log('Generated content:', content)
 
     // For now, just redirect back to the same page
-    // In a real app, you might process the input and redirect to a results page
+    // In a real app, you might process the content and redirect to a results page
     redirect('/')
   }
 }
