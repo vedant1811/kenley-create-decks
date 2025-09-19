@@ -207,7 +207,7 @@ For each slide in the structure, create relevant content based on the topic prov
     })
 
     const slidesWithVariants = await Promise.all(slides)
-    return JSON.stringify(slidesWithVariants, null, 2)
+    return slidesWithVariants
   }
 
   return "Failed to generate content"

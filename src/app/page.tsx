@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import { generatePresentationContent } from '@/lib/openai'
+import { generatePowerPoint, SlidesWithVariants } from '@/lib/pptx-generator'
 
 async function handleSubmit(formData: FormData) {
   'use server'
@@ -9,10 +10,15 @@ async function handleSubmit(formData: FormData) {
   if (input && input.trim()) {
     // Generate presentation content using OpenAI
     const content = await generatePresentationContent(input)
-    console.log('Generated content:', content)
+    const slidesWithVariants: SlidesWithVariants = Array.isArray(content) ? content : []
+    console.log('Generated slides:', slidesWithVariants)
+
+    // Generate PowerPoint presentation
+    const outputPath = await generatePowerPoint(slidesWithVariants)
+    console.log('PowerPoint generated successfully at:', outputPath)
 
     // For now, just redirect back to the same page
-    // In a real app, you might process the content and redirect to a results page
+    // In a real app, you might save the file and provide a download link
     redirect('/')
   }
 }
