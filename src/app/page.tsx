@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation'
 import { generatePresentationContent } from '@/lib/openai'
 import { generatePowerPoint, Slide } from '@/lib/pptx-generator'
+import { convertPptxToPdf } from '@/lib/pptx-to-pdf-converter'
 
 async function handleSubmit(formData: FormData) {
   'use server'
@@ -15,6 +16,18 @@ async function handleSubmit(formData: FormData) {
     // Generate PowerPoint presentation
     const outputPath = await generatePowerPoint(slides)
     console.log('PowerPoint generated successfully at:', outputPath)
+
+    // Convert PPTX to PDF
+    const pdfResult = await convertPptxToPdf({
+      inputPath: outputPath,
+      outputPath: outputPath.replace('.pptx', '.pdf')
+    })
+
+    if (pdfResult.success) {
+      console.log('PDF generated successfully at:', pdfResult.outputPath)
+    } else {
+      console.error('PDF conversion failed:', pdfResult.error)
+    }
 
     // For now, just redirect back to the same page
     // In a real app, you might save the file and provide a download link
