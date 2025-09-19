@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Cover.pptx",
+    "description": "Clean title/cover slide with large headline, subtitle, and space for logo or background image.",
+    "properties": {
+      "title": "Presentation Title",
+      "subtitle": "Subtitle here",
+      "date": "Date here"
+    }
+  },
+  {
+    "name": "Closing Slide.pptx",
+    "description": "Final thank-you / call-to-action slide with room for contact details and branding.",
+    "properties": {
+      "title": "Thank You",
+      "subtitle": "We appreciate your attention.",
+      "email": "email@domain.com",
+      "phone": "+1 234 567 890",
+      "website": "www.example.com"
+    }
+  },
+  {
+    "name": "2 Star bullets.pptx",
+    "description": "Bulleted list where key points are accented with star icons; ideal for highlighting top takeaways.",
+    "properties": {
+      "title": "Conclusion",
+      "bullet1": "Summarise your key findings here.",
+      "bullet2": "Explain how the audience can use this information."
+    }
+  },
+  {
+    "name": "3 Checkboxes.pptx",
+    "description": "Three-item checklist with checkboxes and short descriptions for tasks or requirements.",
+    "properties": {
+      "title": "Summary",
+      "checkbox1": "First major conclusion goes here. It should be a succinct and clear.",
+      "checkbox2": "Second conclusion point goes here. Keep it to one or two sentences.",
+      "checkbox3": "Third and final takeaway goes here for emphasis."
+    }
+  },
+  {
+    "name": "Four Steps.pptx",
+    "description": "Four-step process flow with numbered stages and brief explanations.",
+    "properties": {
+      "title": "Four Steps",
+      "step1": "Explain what happens in step 1.",
+      "step2": "Explain what happens in step 2.",
+      "step3": "Explain what happens in step 3.",
+      "step4": "Explain what happens in step 4."
+    }
+  },
+  {
+    "name": "Two Row Comparison.pptx",
+    "description": "Comparison layout with two stacked rows to contrast features, pricing, or specs.",
+    "properties": {
+      "title": "Two Row Comparison",
+      "title1": "Section 1",
+      "description1": "First bullet point",
+      "title2": "Section 2",
+      "description2": "First bullet point"
+    }
+  },
+  {
+    "name": "Three Feature Highlights.pptx",
+    "description": "Three-card feature highlight layout with icons, short titles, and supporting copy.",
+    "properties": {
+      "title": "Three Feature Highlights",
+      "feature1": "Innovation",
+      "description1": "Describe your innovative idea here.",
+      "feature2": "Performance",
+      "description2": "Highlight key performance metrics",
+      "feature3": "Trends",
+      "description3": "Discuss trends"
+    }
+  },
+  {
+    "name": "Three Columns.pptx",
+    "description": "Three-column content layout for balanced text or mixed text-and-icons.",
+    "properties": {
+      "title": "Three Columns",
+      "section1": "Section 1",
+      "description1": "Content for section 1",
+      "section2": "Section 2",
+      "description2": "Section 2 content",
+      "section3": "Section 3",
+      "description3": "Use this space"
+    }
+  },
+  {
+    "name": "Image & Text.pptx",
+    "description": "Split layout pairing a prominent image area with a descriptive text block.",
+    "properties": {
+      "title": "Image & Text",
+      "imageTitle": "Section title",
+      "imageDescription": "Section content goes here"
+    }
+  },
+  {
+    "name": "Iconic Two Column.pptx",
+    "description": "Two-column layout featuring an icon with each point for fast, scannable reading.",
+    "properties": {
+      "title": "Iconic Two Column",
+      "section1": "Section 1",
+      "bullet1ForSec1": "This is the content for the section 1",
+      "bullet2ForSec1": "Another point",
+      "section2": "Section 2",
+      "bullet1ForSec2": "This is the content for the section 2",
+      "bullet2ForSec2": "Another point"
+    }
+  },
+  {
+    "name": "Two Column Layout.pptx",
+    "description": "Classic side-by-side two-column layout for comparisons or dual narratives.",
+    "properties": {
+      "title": "Two Column Layout",
+      "section1title": "Section 1 title",
+      "section1description": "Section 1 content goes here",
+      "section2title": "Section 2 title",
+      "section2description": "Section 2 content goes here"
+    }
+  }
+]
