@@ -1,0 +1,47 @@
+{
+  "name": "Consulting Proposal — Brief 10-Slide Template",
+  "purpose": "A concise, client-ready proposal deck for consulting engagements (10 slides). Optimized for clarity, decision-making, and fast alignment.",
+  "audience": "Economic buyer and key stakeholders at the client (e.g., sponsor, project lead, finance).",
+  "structure": [
+    {
+      "title": "Cover",
+      "description": "Front page identifying the client, engagement title, your firm, and the date, with a discreet confidentiality footer. Keep the visual design minimal and executive in tone."
+    },
+    {
+      "title": "Executive Summary & Recommendation",
+      "description": "A one-page narrative that states the business challenge, why action is needed now, the proposed solution at a glance, and the headline outcomes. Write it so a busy executive could approve based on this page alone."
+    },
+    {
+      "title": "Client Context & Objectives",
+      "description": "Summarize the client's current situation (market, organization, tech/ops), key constraints, and what success looks like. Clearly define measurable objectives and note what is in scope versus explicitly out of scope."
+    },
+    {
+      "title": "Proposed Approach & Methodology",
+      "description": "Describe the phased approach, the methods and tools to be used (e.g., stakeholder interviews, data analysis, workshops), and how you will collaborate with client teams to accelerate learning and de-risk delivery."
+    },
+    {
+      "title": "Workplan, Timeline & Milestones",
+      "description": "Lay out a realistic week-by-week plan (or sprint plan) with key milestones, decision gates, and dependencies. Highlight the governance rhythm (steering committee, stand-ups, showcases) that keeps momentum and oversight."
+    },
+    {
+      "title": "Deliverables & Success Metrics",
+      "description": "List the tangible deliverables with indicative timing and owners, and define how success will be measured using business-relevant KPIs and leading indicators. Explain how benefits realization will be tracked post-delivery."
+    },
+    {
+      "title": "Team, Roles & Ways of Working",
+      "description": "Introduce the core consulting team and client counterparts, clarify roles and responsibilities (e.g., via a concise RACI), and outline working norms including communication channels, tooling, and response-time expectations."
+    },
+    {
+      "title": "Relevant Experience & Case Studies",
+      "description": "Demonstrate credibility with brief, outcome-focused examples that mirror the client's context. Emphasize quantified results, comparable environments, and any available testimonials or references (with permission)."
+    },
+    {
+      "title": "Commercials, Assumptions & Terms",
+      "description": "Present the pricing model (fixed/T&M/hybrid), what is included, and the critical assumptions and client responsibilities underpinning the estimate. Summarize payment schedule and high-level commercial terms, plus change control."
+    },
+    {
+      "title": "Risks, Mitigations & Next Steps",
+      "description": "Call out the top delivery and adoption risks with practical mitigations and owners. Close with a clear decision checklist and immediate next steps to initiate the engagement (e.g., kickoff date, data access, stakeholder scheduling)."
+    }
+  ]
+}
