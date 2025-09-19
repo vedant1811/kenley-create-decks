@@ -1,4 +1,3 @@
-
 'use client'
 
 import { useState } from 'react'
@@ -142,17 +141,23 @@ export default function Home() {
             </div>
 
             <div className="flex justify-center">
-              <Document
-                file={`data:application/pdf;base64,${pdfData}`}
-                onLoadSuccess={onDocumentLoadSuccess}
-                className="shadow-lg"
-              >
-                <Page
-                  pageNumber={pageNumber}
-                  width={800}
-                  className="border border-gray-300"
-                />
-              </Document>
+              {pdfData ? (
+                <Document
+                  file={`data:application/pdf;base64,${pdfData}`}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                  className="shadow-lg"
+                >
+                  <Page
+                    pageNumber={pageNumber}
+                    width={800}
+                    className="border border-gray-300"
+                  />
+                </Document>
+              ) : (
+                <div className="flex items-center justify-center w-[800px] h-[600px] border border-gray-300 bg-gray-50">
+                  <p className="text-gray-500">Loading PDF...</p>
+                </div>
+              )}
             </div>
           </div>
         )}
