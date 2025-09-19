@@ -169,6 +169,8 @@ Content: ${content}`
 }
 
 export async function generatePresentationContent(topic: string) {
+  console.log('Generating presentation content for topic:', topic)
+  
   const completion = await callLLM(
     [
       {
@@ -196,19 +198,14 @@ For each slide in the structure, create relevant content based on the topic prov
     // Parse tool calls and get variant for each slide
     const slides = response.tool_calls.map(async (call, i) => {
       const args = JSON.parse(call.function.arguments)
-      const variant = await selectVariantForSlide(args.title, args.relevant_content)
+      const variant = await selectVariantForSlide(args.title, args.relevant_content)!
 
-      return {
-        slide: i + 1,
-        title: args.title,
-        content: args.relevant_content,
-        variant: variant
-      }
+      return variant!
     })
 
     const slidesWithVariants = await Promise.all(slides)
     return slidesWithVariants
   }
 
-  return "Failed to generate content"
+  throw new Error("Failed to generate content")
 }

@@ -2,14 +2,15 @@ import path from 'path'
 import fs from 'fs'
 import { spawn } from 'child_process'
 
-export interface Slides {
+export interface Slide {
   name: string // 3 Checkboxes.pptx
   props: { [key: string]: string }
 }
 
-export async function generatePowerPoint(slides: Slides[]): Promise<string> {
-  const pythonScriptPath = path.join(__dirname, 'python', 'main.py')
-  const outputPath = path.join(process.cwd(), 'output', 'GeneratedPresentation.pptx')
+export const outputPath = path.join(process.cwd(), 'src', 'lib', 'output', 'GeneratedPresentation.pptx')
+
+export async function generatePowerPoint(slides: Slide[]): Promise<string> {
+  const pythonScriptPath = path.join(process.cwd(), 'src', 'lib', 'python', 'main.py')
 
   console.log('Python script path:', pythonScriptPath)
   console.log('Output path:', outputPath)

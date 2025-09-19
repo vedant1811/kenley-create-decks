@@ -1,4 +1,4 @@
-import { generatePowerPoint, Slides } from './pptx-generator'
+import { generatePowerPoint, Slide } from './pptx-generator'
 import fs from 'fs'
 import path from 'path'
 import { spawn } from 'child_process'
@@ -7,7 +7,7 @@ import { spawn } from 'child_process'
 
 
 describe('PowerPoint Generator', () => {
-  const testSlides: Slides[] = [
+  const testSlides: Slide[] = [
     {
       "name": "Cover.pptx",
       "props": {

@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 import { generatePresentationContent } from '@/lib/openai'
-import { generatePowerPoint, Slides } from '@/lib/pptx-generator'
+import { generatePowerPoint, Slide } from '@/lib/pptx-generator'
 
 async function handleSubmit(formData: FormData) {
   'use server'
@@ -9,8 +9,7 @@ async function handleSubmit(formData: FormData) {
 
   if (input && input.trim()) {
     // Generate presentation content using OpenAI
-    const content = await generatePresentationContent(input)
-    const slides: Slides = Array.isArray(content) ? content : []
+    const slides: Slide[] = await generatePresentationContent(input)
     console.log('Generated slides:', slides)
 
     // Generate PowerPoint presentation
