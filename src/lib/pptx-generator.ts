@@ -1,7 +1,6 @@
-import { Automizer, modify } from 'pptx-automizer'
 import path from 'path'
 import fs from 'fs'
-import variants from './variants.json'
+import { spawn } from 'child_process'
 
 export interface Slides {
   name: string // 3 Checkboxes.pptx
@@ -9,58 +8,94 @@ export interface Slides {
 }
 
 export async function generatePowerPoint(slides: Slides[]): Promise<string> {
-  const automizer = new Automizer({
-    templateDir: path.join(process.cwd(), 'src', 'lib', 'slides'),
-    outputDir: path.join(process.cwd(), 'temp'),
-    removeExistingSlides: true,
-  })
-
-  const pres = automizer.loadRoot('Cover.pptx') // Start with a base template
-
-  for (const slideData of slides) {
-
-    // Find the variant template
-    const variantTemplate = variants.find(v => v.name === slideData.name)
-    if (!variantTemplate) {
-      console.warn(`Variant template not found: ${slideData.name}`)
-      continue
-    }
-    console.log(`Adding slide: ${slideData.name}`)
-
-    // Add slide using the variant template
-    pres.addSlide(slideData.name, 1, (slide) => {
-      // Replace text content based on variant properties
-      for (const [templateKey, templateValue] of Object.entries(variantTemplate.properties)) {
-        console.log(`Replacing "${templateValue}" with "${slideData.props[templateKey]}"`)
-        const newValue = slideData.props[templateKey]
-        if (newValue) {
-          slide.modifyElement(`${templateKey}Placeholder`, [
-            modify.replaceText([
-              { replace: templateValue, by: { text: newValue } }
-            ])
-          ])
-          console.log(`Replaced "${templateValue}" with "${newValue}"`)
-        }
-      }
-    })
-  }
-
-  // Generate the final presentation
-  const result = await pres.write('GeneratedPresentation.pptx')
-
-  // Save to a local file
+  const pythonScriptPath = path.join(__dirname, 'python', 'main.py')
   const outputPath = path.join(process.cwd(), 'output', 'GeneratedPresentation.pptx')
-  const outputDir = path.dirname(outputPath)
+
+  console.log('Python script path:', pythonScriptPath)
+  console.log('Output path:', outputPath)
 
   // Ensure output directory exists
+  const outputDir = path.dirname(outputPath)
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true })
   }
 
-  // Copy the generated file to the output directory
-  const generatedPath = path.join(process.cwd(), 'temp', 'GeneratedPresentation.pptx')
-  fs.copyFileSync(generatedPath, outputPath)
+  // Convert slides to the format expected by Python script
+  const pythonInput = {
+    slides: slides.map(slide => ({
+      variant: slide.name,
+      content: slide.props
+    }))
+  }
 
-  console.log(`PowerPoint saved to: ${outputPath}`)
-  return outputPath
+  console.log('Processing slides:', slides.length)
+  console.log('Python input:', JSON.stringify(pythonInput, null, 2))
+
+  return new Promise((resolve, reject) => {
+    // Check if Python script exists
+    if (!fs.existsSync(pythonScriptPath)) {
+      reject(new Error(`Python script not found: ${pythonScriptPath}`))
+      return
+    }
+
+    // Spawn Python process
+    const pythonProcess = spawn('python3', [pythonScriptPath], {
+      cwd: process.cwd(),
+      stdio: ['pipe', 'pipe', 'pipe']
+    })
+
+    let stdout = ''
+    let stderr = ''
+
+    // Collect stdout
+    pythonProcess.stdout.on('data', (data) => {
+      stdout += data.toString()
+    })
+
+    // Collect stderr
+    pythonProcess.stderr.on('data', (data) => {
+      stderr += data.toString()
+    })
+
+    // Handle process completion
+    pythonProcess.on('close', (code) => {
+      console.log('Python process stdout:', stdout)
+      if (stderr) {
+        console.log('Python process stderr:', stderr)
+      }
+
+      if (code !== 0) {
+        reject(new Error(`Python script failed with code ${code}: ${stderr}`))
+        return
+      }
+
+      // Check if output file was created
+      if (!fs.existsSync(outputPath)) {
+        reject(new Error(`Output file not created: ${outputPath}`))
+        return
+      }
+
+      // Verify file has content
+      const stats = fs.statSync(outputPath)
+      if (stats.size === 0) {
+        reject(new Error('Output file is empty'))
+        return
+      }
+
+      console.log(`✅ PowerPoint generated successfully!`)
+      console.log(`📁 File: ${outputPath}`)
+      console.log(`📊 Size: ${stats.size} bytes`)
+
+      resolve(outputPath)
+    })
+
+    // Handle process errors
+    pythonProcess.on('error', (error) => {
+      reject(new Error(`Failed to start Python process: ${error.message}`))
+    })
+
+    // Send JSON input to Python process
+    pythonProcess.stdin.write(JSON.stringify(pythonInput))
+    pythonProcess.stdin.end()
+  })
 }
